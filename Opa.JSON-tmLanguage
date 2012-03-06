@@ -1,0 +1,211 @@
+{ "uuid": "af6424dd-5613-463c-9e25-912ab1e9ac69",
+  "name": "Opa",
+  "scopeName": "source.opa", 
+  "fileTypes": ["opa"],
+
+  "patterns": [
+
+
+{ "match": "^\\s*(package|import|import-plugin|database|db)\\b",
+  "name": "keyword.other",
+  "comment": "A keyword"
+},
+
+{ "match": "//.*",
+  "name": "comment.line.double-dash",
+  "comment": "A line comment"
+},
+
+{ "match": "(?=/[*][*])[ \t]*[A-Za-z_0-0]+",
+  "name": "invalid",
+  "comment": "A doc comment header"
+},
+
+
+{ "begin": "/[*][*]",
+  "end":    "[*][/]",
+  "name": "comment.block.documentation",
+  "comment": "A doc comment"
+},
+
+{ "begin": "/[*]",
+  "end":    "[*]/",
+  "name": "comment.block",
+  "comment": "A block comment"
+},
+
+{ "match": "\\belse\\b",
+  "name": "keyword.control",
+  "comment": "A keyword"
+},
+
+{ "match": "(?<=})(\\\"|[^\"{])*(?={)",
+  "name": "string.quoted",
+  "comment": "A constant string part"
+},
+
+{ "match": "\"(\\\"|[^\"{])*(?={)",
+  "name": "string.quoted",
+  "comment": "An interpolated string start"
+},
+
+{ "match": "(?<=})(\\\"|[^\"{])*\"",
+  "name": "string.quoted",
+  "comment": "An interpolated string end"
+},
+
+{ "match": "\"(\\\"|[^\"{])*\"",
+  "name": "string.quoted",
+  "comment": "A constant string"
+},
+
+{ "match": "\\b[0-9]+([.][0-9]+)?(e(-|[+]?)[0-9]+)?\\b",
+  "name": "constant.numeric",
+  "comment": "A real"
+},
+
+
+{
+  "match": "</([-A-Za-z0-9]+:)?[A-Za-z0-9]*>",
+  "name": "string.other",
+  "comment": "Close tag"
+},
+
+{
+  "match": "<([-A-Za-z0-9]+)?(([A-Za-z0-9]+( |>)))((?![{])(?!</).)*",
+  "name": "string.other",
+  "comment": "Tag until end or insert"
+},
+
+{
+  "match": "<>((?![{])(?!</).)*",
+  "name": "string.other",
+  "comment": "Tag until end or insert"
+},
+
+{
+  "match": "(?<=})[ \t]*>((?![{])(?!</).)*",
+  "name": "string.other",
+  "comment": "Insert end in tag"
+},
+
+{ "match": "(?<=})([^<{])*(?=<)",
+  "name": "string.quoted",
+  "comment": "An xhtml end"
+},
+
+
+{
+  "match": "(?<=(</))[ \t]*>[^{]*(?=(/>))",
+  "name": "string.other",
+  "comment": "Insert end in tag"
+},
+
+{ "match": "^[ \t]*[#][-`a-zA-Z]+[ \t]*(?=([=]|<-))",
+  "name": "storage.modifier",
+  "comment": "A dom side effect target"
+},
+
+{ "match": "^[ \t]*[/][-`a-zA-Z/]+[ \t]*(?=([=]|<-))",
+  "name": "storage.modifier",
+  "comment": "A db side effect target"
+},
+
+
+{ "match": "^[ \t]*[a-zA-Z_]+[ \t]*(:[ \t]*[A-Za-z0-9]+[ \t]*)?(?=[=])",
+  "name": "support.constant",
+  "comment": "A constant binding"
+},
+
+{ "match": "^[ \t]*`[^`]+`[ \t]*(:[A-Za-z0-9]+)?(?=[=])",
+  "name": "support.constant",
+  "comment": "A constant binding"
+},
+
+
+{ "match": "(?<=function)[ \t]*[a-zA-Z_]+(?=[(])",
+  "name": "support.function",
+  "comment": "A function binding"
+},
+
+{ "match": "(?<=function)[ \t]*`[^`]+`+(?=[(])",
+  "name": "support.function",
+  "comment": "A function binding"
+},
+
+
+{ "match": "[a-zA-Z_]+[(][^)]*[)][ \t]*([:][^=]*?)?(?=[=])",
+  "name": "support.function",
+  "comment": "A function binding"
+},
+
+{ "match": "`[^`]+`[(][^)]*[)][ \t]*(?=[=])",
+  "name": "support.function",
+  "comment": "A function binding"
+},
+
+
+
+{ "match": "<|>|==|<=|>=|!=",
+  "name": "support.function",
+  "comment": "A comparison"
+},
+
+
+{ "match": "\\b(type|function|module|match|parser|with|as|case|default|if|then|else|or)\\b",
+  "name": "keyword.control",
+  "comment": "A keyword"
+},
+
+{ "match": "(=|:|<-|[|]|->)",
+  "name": "keyword.control",
+  "comment": "A keyword"
+},
+
+
+{ "match": "\\b(client|server|exposed)\\b",
+  "name": "invalid.illegal",
+  "comment": "A dangerous directive"
+},
+
+{ "match": "(@client|@server|@publish)\\b",
+  "name": "invalid.illegal",
+  "comment": "A dangerous directive"
+},
+
+{ "match": "(\\bprivate|\\bprotected|@private|@server_private|@async)\\b",
+  "name": "keyword.other",
+  "comment": "A safe directive"
+},
+
+
+{ "match": "@static_include_directory|@static_resource_directory",
+  "name": "keyword.other",
+  "comment": "A directive"
+},
+
+
+{ "match": "@[A-Za-z0-9_]+\\b",
+  "name": "invalid.deprecated",
+  "comment": "An exotic directive"
+},
+
+
+
+{ "match": "[-+*/]+",
+  "name": "support.function",
+  "comment": "An operator"
+},
+
+{ "match": "[[(){},;]|]",
+  "name": "delimiter",
+  "comment" : "delimiter, take something else for name"
+},
+
+{ "match": "true|false|void|none|empty",
+  "name": "constant.language",
+  "comment": "A well known named constant"
+}
+
+  ]
+}

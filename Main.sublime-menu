@@ -1,0 +1,19 @@
+[
+    {
+        "id": "tools",
+        "children":
+        [
+            {
+                "id": "opa",
+                "caption": "Opa",
+                "children":
+                        [
+                            { "caption": "Build"            , "command": "build" },
+                            { "caption": "Run"              , "command": "Disabled"},
+                            { "caption": "Run (no rebuild)" , "command": "Disabled"},
+                            { "caption": "Monitor"          , "command": "Disabled"}
+                            ]
+            }
+        ]
+    }
+]

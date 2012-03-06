@@ -1,0 +1,7 @@
+{ 
+	"cmd": ["opa --no-color *.opa"],
+	"file_regex": "^(?:File|In)[^ ]*[ ]+[\"]?([^\"[]+[.]opa)[\"]?[^[(]*[[(]([0-9]+):([0-9]+)-[0-9]+:([0-9]+)[^)].*$",
+	"working_dir": "${project_path:${folder}}",
+	"selector": "source.opa",
+	"shell": true
+}

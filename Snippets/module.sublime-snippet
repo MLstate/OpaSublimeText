@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+/** $1 */
+module $1 {
+	$2
+}
+$3
+]]></content>
+    <tabTrigger>module</tabTrigger>
+	<scope>source.opa</scope>
+	<description>module declaration</description>
+</snippet>

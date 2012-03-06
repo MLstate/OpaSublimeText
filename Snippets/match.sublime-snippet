@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+match(){
+case $1:
+	$2
+case _ :
+	$3
+}
+$4
+]]></content>
+    <tabTrigger>match</tabTrigger>
+	<scope>source.opa</scope>
+</snippet>

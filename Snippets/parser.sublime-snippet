@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+parser {
+| $1 -> $2
+}
+$3
+]]></content>
+    <tabTrigger>parser</tabTrigger>
+	<scope>source.opa</scope>
+</snippet>

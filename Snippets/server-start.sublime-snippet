@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+Server.start(
+	Server.http, // Server.https
+	[
+	 {resources:@static_include("resources")},
+	 {register:[]},
+	 $1 // {title:"mypage" page():<div> HELLO </>} / {filter :} // http://doc.opalang.org/#!/type/stdlib.core.web.server/Server/handler
+	]
+)
+]]></content>
+    <tabTrigger>Server.start</tabTrigger>
+	<scope>source.opa</scope>
+</snippet>

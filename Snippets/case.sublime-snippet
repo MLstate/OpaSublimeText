@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+case $1:
+	$2
+$3
+]]></content>
+    <tabTrigger>case</tabTrigger>
+	<scope>source.opa</scope>
+</snippet>

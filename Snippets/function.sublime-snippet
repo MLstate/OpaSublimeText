@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+/** $1 */
+function $1($2){
+	$3
+}
+$4
+]]></content>
+    <tabTrigger>function</tabTrigger>
+	<scope>source.opa</scope>
+	<description>function declaration</description>
+</snippet>
