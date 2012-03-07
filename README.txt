@@ -34,23 +34,25 @@ Choose a build system.
 or
 [Tools -> Build -> Build Sytem -> Opa-One]
 
-Then press F7 or go in menu [Toos -> Opa -> Build].
+Then press F7 or go in menu [Tools -> Opa -> Build].
 
 Opa-One will compile the file in the focused buffer.
 Opa-All will compile all files in the same directory as the focus buffer.
+Opa-Conf will compile the conf files in the same directory as the focus buffer.
 
 Press F4 to naviguate in compilation error, if any.
 
+
 # How to build with classic syntax ?
 
-Edit Opa-All.sublime-build or Opa-One.sublime-build, and add "--parser classic" in the cmd field just after opa.
+Edit Opa-XXX.sublime-build, and add "--parser classic" in the cmd field just after opa.
 
 
 # How to run ?
 
-You have to do it manually for now.
-Go in the same directory as the sources, the .exe should be there.
-Or alternatively, add "--" at the end of the cmd field of subime-build files (see previous question)
+Press F7 or [Tools -> Opa -> Run]
+The compilation is done automatically, but there is a sync problem.
+So it's safer to build before for now.
 
 
 # What else ?

@@ -9,7 +9,8 @@
                 "children":
                         [
                             { "caption": "Build"            , "command": "build" },
-                            { "caption": "Run"              , "command": "Disabled"},
+                            { "caption": "Run"              , "command": "run_opa_build"},
+                            { "caption": "Stop"             , "command": "stop_run_opa_build"},
                             { "caption": "Run (no rebuild)" , "command": "Disabled"},
                             { "caption": "Monitor"          , "command": "Disabled"}
                             ]

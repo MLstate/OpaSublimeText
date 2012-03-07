@@ -1,3 +1,6 @@
 [
-	{ "keys": ["ctrl+d"], "command": "goto_opa_doc" }
+	{ "keys": ["ctrl+d"], "command": "goto_opa_doc" },
+	{ "keys": ["f8"], "command": "run_opa_build" },
+	{ "keys": ["f9"], "command": "stop_run_opa_build" }
+
 ]
