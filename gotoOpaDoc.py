@@ -8,8 +8,8 @@ class gotoOpaDocCommand(sublime_plugin.TextCommand):
         word = self.view.substr(self.view.word(self.view.sel()[0].begin()))
         for region in self.view.sel():
             docapi = 'http://doc.opalang.org/api'
-            #docapisearch = 'http://doc.opalang.org/search?q='
-            docapisearch = 'http://doc.opalang.org/#!/search/'
+            docapisearch = 'http://doc.opalang.org/search?q='
+            #docapisearch = 'http://doc.opalang.org/#!/search/'
             if not region.empty():
                 phrase = self.view.substr(region)
                 webbrowser.open_new_tab(docapisearch + phrase)
