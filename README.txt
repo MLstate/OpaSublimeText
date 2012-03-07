@@ -1,3 +1,14 @@
+# Plugin functionalities :
+
+1) Syntax highlighting (classic and js-like)
+
+2) Build systems (js-like and classic via manual modification)
+
+3) Completion based on the stdlib
+
+4) Contextual access to the online API documentation
+
+
 # How to install the Opa plugin ?
 
 1) Get https://github.com/downloads/OpaOnWindowsNow/OpaSublimeText/Opa.sublime-package
@@ -30,11 +41,16 @@ Opa-All will compile all files in the same directory as the focus buffer.
 
 Press F4 to naviguate in compilation error, if any.
 
+# How to build with classic syntax ?
+
+Edit Opa-All.sublime-build or Opa-One.sublime-build, and add "--parser classic" in the cmd field just after opa.
+
 
 # How to run ?
 
 You have to do it manually for now.
 Go in the same directory as the sources, the .exe should be there.
+Or alternatively, add "--" at the end of the cmd field of subime-build files (see previous question)
 
 
 # What else ?
