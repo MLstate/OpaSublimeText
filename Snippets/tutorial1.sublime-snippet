@@ -1,0 +1,35 @@
+<snippet>
+	<content><![CDATA[
+/* Welcome to Opa tutorial 1
+   The goal is to write a "Hello World", for the Web. 
+   Tutorial instructions are in comments 
+*/
+
+/* STEP 1
+   Define a function a header 1 (e.g. <h1>) tag containing the messsage "Hello World Wide Web"
+   1) Write 'function', while doing it, use the completion to expand to a function skeleton
+   2) Enter the function name
+   3) Press tab
+   4) Enter the value returned by the function
+*/
+$1
+
+/* STEP 2
+   The server launch
+   1) Write 'Server.start', while doing it, use the completion to expand it to a skeleton call to Server.start
+   2) Change the content of the record : the field page sould be equal to the previously defined function
+*/
+
+
+/* STEP 3
+   Build & Run & Test
+   1) [ctrl+b] or [f7] to build, use [f4] to search for eventual problem (e.g. syntax error, type error ...)
+   2) [f8] to run
+   3) open a browser on localhost:2000
+   4) [f9] to kill all server launched (in sublime)
+*/
+
+]]></content>
+    <tabTrigger>TUTORIAL_01</tabTrigger>
+	<scope>source.opa</scope>
+</snippet>
