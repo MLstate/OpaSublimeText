@@ -73,6 +73,8 @@ So it's safer to build before for now.
    - press tab
    ...
 
+- integrated first step tutorial (write "TUTORIAL" and select the completion)
+
 # How to install from source
 Copy the content of the repo directory to a new Opa directory in
 mkdir -p  ~/.config/sublime-text2/
