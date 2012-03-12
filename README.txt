@@ -8,6 +8,8 @@
 
 4) Contextual access to the online API documentation
 
+5) Tutorials (one for now, many are coming)
+
 
 # How to install the Opa plugin ?
 
