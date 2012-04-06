@@ -134,7 +134,7 @@
 },
 
 
-{ "match": "[a-zA-Z_]+[(][^)]*[)][ \t]*([:][^=]*?)?(?=[=])",
+{ "match": "[a-zA-Z_]+[(][^)]*[)][ \t]*([:][^=]*?)?(?=[=])(?!==)",
   "name": "support.function",
   "comment": "A function binding"
 },
