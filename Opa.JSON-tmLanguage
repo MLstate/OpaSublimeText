@@ -152,7 +152,7 @@
 },
 
 
-{ "match": "\\b(type|function|module|match|parser|with|as|case|default|if|then|else|or)\\b",
+{ "match": "\\b(type|function|module|match|parser|with|as|case|default|if|then|else|or|end)\\b",
   "name": "keyword.control",
   "comment": "A keyword"
 },
