@@ -112,7 +112,7 @@
 },
 
 
-{ "match": "^[ \t]*[a-zA-Z_]+[ \t]*(:[ \t]*[A-Za-z0-9]+[ \t]*)?(?=[=])",
+{ "match": "^[ \t]*[a-zA-Z_0-9]+[ \t]*(:[ \t]*[A-Za-z0-9]+[ \t]*)?(?!==)(?=[=])",
   "name": "support.constant",
   "comment": "A constant binding"
 },
@@ -123,7 +123,7 @@
 },
 
 
-{ "match": "(?<=function)[ \t]*[a-zA-Z_]+(?=[(])",
+{ "match": "(?<=function)[ \t]*([A-Za-z0-9.]+[ \t]+)?[a-zA-Z_0-9]+(?=[(])",
   "name": "support.function",
   "comment": "A function binding"
 },
