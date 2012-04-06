@@ -39,22 +39,22 @@
   "comment": "A keyword"
 },
 
-{ "match": "(?<=})(\\\"|[^\"{])*(?={)",
+{ "match": "(?<=})(\\\"|\\{|[^\"{])*(?={)",
   "name": "string.quoted",
   "comment": "A constant string part"
 },
 
-{ "match": "\"(\\\"|[^\"{])*(?={)",
+{ "match": "\"(\\\"|\\{|[^\"{])*(?={)",
   "name": "string.quoted",
   "comment": "An interpolated string start"
 },
 
-{ "match": "(?<=})(\\\"|[^\"{])*\"",
+{ "match": "(?<=})(\\\"|\\{|[^\"{])*\"",
   "name": "string.quoted",
   "comment": "An interpolated string end"
 },
 
-{ "match": "\"(\\\"|[^\"{])*\"",
+{ "match": "\"(\\\"|\\{|[^\"{])*\"",
   "name": "string.quoted",
   "comment": "A constant string"
 },
