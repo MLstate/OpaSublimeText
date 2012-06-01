@@ -1,14 +1,19 @@
 import os
 import sublime, sublime_plugin
+import sys
+
+basename_exe = "opa_build"
+exe = basename_exe+".exe"
 
 def kill(self,dirname,exe):
-	self.view.window().run_command('exec', {'cmd': ["killall "+exe], 'working_dir':dirname, 'shell':True} )
+        if sys.platform.startswith('win'):
+                self.view.window().run_command('exec', {'cmd': ["tskill "+os.path.splitext(exe)[0]], 'working_dir':dirname, 'shell':True} )
+        else:
+                self.view.window().run_command('exec', {'cmd': ["killall "+exe], 'working_dir':dirname, 'shell':True} )
 
 def launch(self,dirname,exe):
-	exe = os.path.join(dirname,"opa_build.exe")
+	exe = os.path.join(dirname,exe)
 	self.view.window().run_command('exec', {'cmd': [exe+" -p 2000"], 'working_dir':dirname, 'shell':True} )
-
-exe = "opa_build.exe"
 
 class RunOpaBuildCommand(sublime_plugin.TextCommand):
 	def run(self, view):
