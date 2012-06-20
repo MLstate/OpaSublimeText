@@ -17,6 +17,7 @@
 
 2) Move it to ~/.config/sublime-text2/Installed Packages/ (linux)
 or %APPDATA%\Sublime Text 2\Installed Packages\ (windows)
+or <your_portable_install_path>\Sublime Text 2\Pristine Packages\ (windows)
 or ~/Library/Application Support/Sublime Text 2/Installed Packages (mac)
 
 3) Start sublime and check that menu entry [View -> Syntax -> Opa] is present
