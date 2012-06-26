@@ -1,4 +1,5 @@
 { 
+	"path": "/usr/local/bin/",
 	"cmd": ["opa --no-color $file -o opa_build.exe"],
 	"file_regex": "^(?:File|In)[^ ]*[ ]+[\"]?([^\"[]+[.]opa)[\"]?[^[(]*[[(]([0-9]+):([0-9]+)-[0-9]+:([0-9]+).*",
 	"working_dir": "${project_path:${folder}}",
