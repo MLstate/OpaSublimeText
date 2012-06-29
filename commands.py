@@ -6,10 +6,10 @@ basename_exe = "opa_build"
 exe = basename_exe+".exe"
 
 def kill(self,dirname,exe):
-        if sys.platform.startswith('win'):
-                self.view.window().run_command('exec', {'cmd': ["tskill "+os.path.splitext(exe)[0]], 'working_dir':dirname, 'shell':True} )
-        else:
-                self.view.window().run_command('exec', {'cmd': ["killall "+exe], 'working_dir':dirname, 'shell':True} )
+	if sys.platform.startswith('win'):
+		self.view.window().run_command('exec', {'cmd': ["tskill "+os.path.splitext(exe)[0]], 'working_dir':dirname, 'shell':True} )
+	else:
+		self.view.window().run_command('exec', {'cmd': ["killall "+exe], 'working_dir':dirname, 'shell':True} )
 
 def launch(self,dirname,exe):
 	exe = os.path.join(dirname,exe)
