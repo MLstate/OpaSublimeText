@@ -16,7 +16,7 @@
   "comment": "A line comment"
 },
 
-{ "match": "(?=/[*][*])[ \t]*[A-Za-z_0-0]+",
+{ "match": "(?=/[*][*])[ \t]*[A-Za-z_0-9]+",
   "name": "invalid",
   "comment": "A doc comment header"
 },
