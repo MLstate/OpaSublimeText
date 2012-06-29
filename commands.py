@@ -13,7 +13,12 @@ def kill(self,dirname,exe):
 
 def launch(self,dirname,exe):
 	exe = os.path.join(dirname,exe)
-	self.view.window().run_command('exec', {'cmd': [exe+" -p 2000"], 'working_dir':dirname, 'shell':True} )
+	if sys.platform.startswith('win'):
+		node_path = os.path.join(os.getenv("APPDATA"),"npm","node_modules")
+		os.environ["NODE_PATH"] = node_path
+		self.view.window().run_command('exec', {'cmd': ["node "+exe+" -p 2000"], 'working_dir':dirname, 'shell':True} )
+	else:
+		self.view.window().run_command('exec', {'cmd': [exe+" -p 2000"], 'working_dir':dirname, 'shell':True} )
 
 class RunOpaBuildCommand(sublime_plugin.TextCommand):
 	def run(self, view):
