@@ -1,20 +1,13 @@
 <snippet>
 	<content><![CDATA[
 Server.start(
-	Server.http, // default configuration for a http server, default port is 8080
-	// Below is the Server.handler that will handle your requests,
-	// Select Server.start and do [ctrl+d] to obtain the doc
+	Server.http, // default port is 8080
 	[
-		// embbed resources in resources directory
-		// {resources:@static_resource_directory("resources") },
-		// other js and css resources
-	 	// ${register:[]},
-	 	// the standard dispatcher for urls
-	 	// {dispatcher:$2},
-
-	 	// a simple page response for all page request, mostly for tutorials and beginners:)
-	 	// {title:"mypage", page:$1your_content_page_function}
-	]
+		// {resources:@static_resource_directory("resources") }, // embbed resources in resources directory
+	 	// ${register:[]}, // other js and css resources
+	 	// {dispatcher:dispatcher}, // the standard dispatcher for urls
+	 	{title:"mypage", page:$1your_content_page_function}
+	] // Browse Server.start [ctrl+d] doc if needed
 )
 ]]></content>
     <tabTrigger>Server.start</tabTrigger>
