@@ -2,6 +2,7 @@ import os
 import sublime, sublime_plugin
 import sys
 import task, subprocess, signal
+import time
 
 basename_exe = "opa_build"
 
@@ -18,6 +19,12 @@ def prog_name(prog):
 		return prog+".exe"
 	else:
 		return prog
+
+def modtime(filename):
+	try:
+		return os.path.getmtime(filename)
+	except:
+		return time.min
 
 def location(program):
 	if not (program in locations):
@@ -97,14 +104,20 @@ class runOpaBuildCommand(sublime_plugin.TextCommand):
 		exe = exe_name
 		output(panel, "Will build & run "+exe)
 		output(panel,"\nCompiling ...")
+		tbuild0 = modtime(os.path.join(dirname,exe)) # because we have no error code, we have to check if a new exe has been generated
 		self.view.window().run_command('build')
-		output(panel,"done\n")
-		output(panel,"\nStoping previous launch ...")
-		kill(self,dirname,exe)
-		output(panel,"done\n")
-		output(panel,"Launching ...")
-		launch(self,dirname,exe)
-		#output(panel,"The application has started\n")
+		time.sleep(0.8) # for some reason the modification time is modified latter
+		tbuild1 = modtime(os.path.join(dirname,exe))
+		if tbuild0 < tbuild1:
+			output(panel,"done\n")
+			output(panel,"\nStoping previous launch ...")
+			kill(self,dirname,exe)
+			output(panel,"done\n")
+			output(panel,"Launching ...")
+			launch(self,dirname,exe)
+			#output(panel,"The application has started\n")
+		else:
+			output(panel,"Build failure\n")
 
 
 class stopRunOpaBuildCommand(sublime_plugin.TextCommand):
