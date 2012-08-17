@@ -12,7 +12,7 @@ Sublime: http://www.sublimetext.com/
 
 # How to install the Opa plugin ?
 
-1) Get https://github.com/downloads/OpaOnWindowsNow/OpaSublimeText/Opa.sublime-package
+1) Get https://github.com/downloads/MLstate/OpaSublimeText/Opa.sublime-package
 
 2) Move it to ~/.config/sublime-text2/Installed Packages/ (linux)
 or %APPDATA%\Sublime Text 2\Installed Packages\ (windows)
