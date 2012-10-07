@@ -1,7 +1,6 @@
 <snippet>
 	<content><![CDATA[
-/** $1 */
-module $1 {
+module ${1:name} {
 	$2
 }
 $3

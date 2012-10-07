@@ -1,9 +1,8 @@
 <snippet>
 	<content><![CDATA[
-match ($1) {
-	$2
-	default:
-		$3
+match (${1:expression}) {
+	${2:case}
+	${3:default:}
 }
 $4
 ]]></content>

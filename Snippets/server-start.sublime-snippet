@@ -2,7 +2,7 @@
 	<content><![CDATA[
 Server.start(
 	Server.http,
-	{ title: "$TM_FILENAME", page: ${1:function name} }
+	{ title: "${1:$TM_FILENAME}", page: ${2:function} }
 )
 ]]></content>
     <tabTrigger>Server.start</tabTrigger>

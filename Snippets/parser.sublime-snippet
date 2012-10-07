@@ -1,7 +1,7 @@
 <snippet>
 	<content><![CDATA[
 parser {
-| $1 -> $2
+| ${1:pattern} -> $2
 }
 $3
 ]]></content>
