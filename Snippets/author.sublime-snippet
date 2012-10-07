@@ -1,7 +1,0 @@
-<snippet>
-	<content><![CDATA[
-$TM_FILENAME : $TM_FULLNAME
-]]></content>
-    <tabTrigger>MeMyselfAndI</tabTrigger>
-	<scope>source.opa</scope>
-</snippet>

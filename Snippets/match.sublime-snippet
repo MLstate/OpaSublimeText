@@ -1,10 +1,9 @@
 <snippet>
 	<content><![CDATA[
-match(){
-case $1:
+match ($1) {
 	$2
-case _ :
-	$3
+	default:
+		$3
 }
 $4
 ]]></content>

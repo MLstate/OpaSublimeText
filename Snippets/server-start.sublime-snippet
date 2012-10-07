@@ -1,13 +1,8 @@
 <snippet>
 	<content><![CDATA[
 Server.start(
-	Server.http, // default port is 8080
-	[
-		// {resources:@static_resource_directory("resources") }, // embbed resources in resources directory
-	 	// ${register:[]}, // other js and css resources
-	 	// {dispatcher:dispatcher}, // the standard dispatcher for urls
-	 	{title:"mypage", page:$1your_content_page_function}
-	] // Browse Server.start [ctrl+d] doc if needed
+	Server.http,
+	{ title: "$TM_FILENAME", page: ${1:function name} }
 )
 ]]></content>
     <tabTrigger>Server.start</tabTrigger>
