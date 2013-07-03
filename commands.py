@@ -99,15 +99,18 @@ def output(view,str):
 
 class runOpaBuildCommand(sublime_plugin.TextCommand):
 	def run(self, view):
-		panel = self.view.window().get_output_panel("exec")
-		dirname = os.path.dirname(self.view.file_name())
+		wait = 5
 		exe = exe_name
+		dirname = getAppDir(self.view.file_name())
+		panel = self.view.window().get_output_panel("exec")
 		output(panel, "Will build & run "+exe)
 		output(panel,"\nCompiling ...")
 		tbuild0 = modtime(os.path.join(dirname,exe)) # because we have no error code, we have to check if a new exe has been generated
 		self.view.window().run_command('build')
-		time.sleep(0.8) # for some reason the modification time is modified latter
-		tbuild1 = modtime(os.path.join(dirname,exe))
+		while tbuild0 ==  modtime(os.path.join(dirname,exe)) and wait:
+			wait -=1
+			time.sleep(1) # for some reason the modification time is modified latter
+		tbuild1 =  modtime(os.path.join(dirname,exe))
 		if tbuild0 < tbuild1:
 			output(panel,"done\n")
 			output(panel,"\nStoping previous launch ...")
@@ -122,6 +125,18 @@ class runOpaBuildCommand(sublime_plugin.TextCommand):
 
 class stopRunOpaBuildCommand(sublime_plugin.TextCommand):
 	def run(self, view):
-		dirname = os.path.dirname(self.view.file_name())
+		dirname = getAppDir(self.view.file_name())
 		print "Will kill", exe_name
 		kill(self,dirname,exe_name)
+		
+def getAppDir(filepath):
+	dirname = os.path.dirname(filepath)
+	dn2 = dirname
+	dn1 = ""
+	while dn1 != dn2:
+		dn1 = dn2
+		if os.path.exists(os.path.join(dn1, "opa.conf")):
+			dirname = dn1
+			break
+		dn2 = os.path.dirname(dn1)
+	return dirname
