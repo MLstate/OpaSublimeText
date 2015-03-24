@@ -1,211 +1,314 @@
 { "uuid": "af6424dd-5613-463c-9e25-912ab1e9ac69",
   "name": "Opa",
-  "scopeName": "source.opa", 
+  "scopeName": "source.opa",
   "fileTypes": ["opa"],
+
+  "repository": {
+    "string-insert": {
+      "begin": "{",
+      "end": "}",
+      "patterns": [
+        { "include": "$self" }
+      ]
+    },
+    "character-escape": {
+      "match": "\\\\.",
+      "name": "constant.character.escape",
+      "comment": "An escaped character"
+    },
+    "string": {
+      "begin": "\"",
+      "beginCaptures": {
+        "0": { "name": "string.quoted" }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": { "name": "string.quoted" }
+      },
+      "comment": "A quoted string with insertions",
+      "patterns": [
+        { "include": "#character-escape" },
+        { "include": "#string-insert" },
+        {
+          "match": ".*?",
+          "comment": "String content",
+          "name": "string.quoted"
+        }
+      ]
+    },
+    "xhtml-attribute": {
+      "patterns": [
+        {
+          "match": "(\\s*[^\\s\"/><'=]+)(?:\\s*)(=)(?:\\s*)(\\w+)",
+          "captures": {
+            "1": { "name": "xhtml.attribute.name, support.constant" },
+            "2": { "name": "keyword.control" },
+            "3": { "name": "support.type" }
+          },
+          "comment": "An attribute with computed value."
+        },
+        {
+          "begin": "(\\s*[^\\s\"/><'=]+)(?:\\s*)(=)(?:\\s*)(\")",
+          "beginCaptures": {
+            "1": { "name": "xhtml.attribute.name, support.constant" },
+            "2": { "name": "keyword.control" },
+            "3": { "name": "string.quoted" }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": { "name": "string.quoted" }
+          },
+          "comment": "An attribute with string value.",
+          "patterns": [
+            { "include": "#character-escape" },
+            { "include": "#string-insert" },
+            {
+              "match": ".*?",
+              "name": "string.quoted"
+            }
+          ]
+        },
+        {
+          "begin": "(\\s*[^\\s\"/><'=]+)(?:\\s*)(=)(?:\\s*)({)",
+          "beginCaptures": {
+            "1": { "name": "xhtml.attribute.name, support.constant" },
+            "2": { "name": "keyword.control" },
+            "3": { "name": "meta.delimiter.insert, string.quoted" }
+          },
+          "end": "}",
+          "endCaptures": {
+            "0": { "name": "meta.delimiter.insert, string.quoted" }
+          },
+          "comment": "An attribute with an inserted value.",
+          "patterns": [
+            { "include": "$self" }
+          ]
+        },
+        {
+          "match": "\\s*[^\\s\"/><'=]+",
+          "name": "xhtml.attribute.name, support.constant",
+          "comment": "An empty attribute."
+        }
+      ]
+    },
+    "xhtml-content": {
+      "begin": "\\s*>",
+      "beginCaptures": {
+        "0": { "name": "xhtml.tag.delimiter, string.quoted" }
+      },
+      "end": "(?=</)",
+      "patterns": [
+        { "include": "#string-insert" },
+        { "include": "#xhtml" },
+        {
+          "match": ".*?",
+          "name": "xhtml.text, string.quoted",
+          "comment": "Xhtml text nodes."
+        }
+      ]
+    },
+    "xhtml": {
+      "patterns": [
+        {
+          "begin": "(<)((\\w+)|(?=>))",
+          "beginCaptures": {
+            "1": { "name": "xhtml.tag.delimiter, string.quoted" },
+            "2": { "name": "xhtml.tag.name, string.quoted" },
+            "3": { "name": "xhtml.tag.delimiter, string.quoted" }
+          },
+          "end": "(/>)|(</)(\\w*)(?:\\s*)(>)",
+          "endCaptures": {
+            "1": { "name": "xhtml.tag.delimiter, string.quoted" },
+            "2": { "name": "xhtml.tag.delimiter, string.quoted" },
+            "3": { "name": "xhtml.tag.name, string.quoted" },
+            "4": { "name": "xhtml.tag.delimiter, string.quoted" }
+          },
+          // "contentName": "xhtml.text",
+          "comment": "Xhtml value with opening and ending tags.",
+          "patterns": [
+            { "include": "#xhtml-content" },
+            { "include": "#xhtml-attribute" }
+          ]
+        }
+      ]
+    },
+    "function-arg": {
+      "match": "([a-zA-Z0-9()._]+\\s+)?(\\w+)",
+      "captures": {
+        "1": { "name": "support.type" },
+        "2": { "name": "variable.parameter" }
+      },
+      "comment": "A (typed) function argument"
+    },
+    "function-body": {
+      "begin": "\\)\\s*({)",
+      "beginCaptures": {
+        "1": { "name": "meta.delimiter.function" }
+      },
+      "end": "(?=})",
+      "comment": "A function body.",
+      "patterns": [
+        { "include": "$self" }
+      ]
+    },
+    "function-def": {
+      "begin": "(?<=function)(?:\\s+)([A-Za-z0-9()._]+\\s+)?([A-Za-z0-9._]*)(?:\\s*)\\(",
+      "beginCaptures": {
+        "1": { "name": "support.type" },
+        "2": { "name": "entity.name.function" }
+      },
+      "end": "}",
+      "endCaptures": {
+        "0": { "name": "meta.delimiter.function" }
+      },
+      "comment": "A function definition.",
+      "patterns": [
+        { "include": "#function-body" },
+        { "include": "#function-arg" }
+      ]
+    }
+  },
 
   "patterns": [
 
+    /** Comments and documentation. */
 
-{ "match": "^\\s*(package|import|import-plugin|database|db)\\b",
-  "name": "keyword.other",
-  "comment": "A keyword"
-},
+    {
+      "match": "//.*",
+      "name": "comment.line.double-dash",
+      "comment": "A line comment"
+    },
+    {
+      "match": "(?=/[*][*])[ \t]*[A-Za-z_0-9]+",
+      "name": "invalid",
+      "comment": "A doc comment header"
+    },
+    {
+      "begin": "/[*][*]",
+      "end":    "[*][/]",
+      "name": "comment.block.documentation",
+      "comment": "A doc comment"
+    },
+    {
+      "begin": "/[*]",
+      "end":    "[*]/",
+      "name": "comment.block",
+      "comment": "A block comment"
+    },
 
-{ "match": "//.*",
-  "name": "comment.line.double-dash",
-  "comment": "A line comment"
-},
+    /** Preprocessor headers. */
 
-{ "match": "(?=/[*][*])[ \t]*[A-Za-z_0-9]+",
-  "name": "invalid",
-  "comment": "A doc comment header"
-},
+    {
+      "match": "#<[^>]*>",
+      "name": "comment.block.preprocessor",
+      "comment": "A preprocessor command."
+    },
 
+    /**
+     * Strings and XHTML values.
+     * String inserts stand for records and expression blocks.
+     */
 
-{ "begin": "/[*][*]",
-  "end":    "[*][/]",
-  "name": "comment.block.documentation",
-  "comment": "A doc comment"
-},
+    { "include": "#string" },
+    { "include": "#string-insert" },
+    { "include": "#xhtml" },
 
-{ "begin": "/[*]",
-  "end":    "[*]/",
-  "name": "comment.block",
-  "comment": "A block comment"
-},
+    /** Database. */
 
-{ "match": "\\belse\\b",
-  "name": "keyword.control",
-  "comment": "A keyword"
-},
+    {
+      "match": "@?(/\\w+)+",
+      "name": "database.path",
+      "comment": "A database path"
+    },
 
-{ "match": "(?<=})(\\\"|\\{|[^\"{])*(?={)",
-  "name": "string.quoted",
-  "comment": "A constant string part"
-},
+    /** Language keywords and constants. */
 
-{ "match": "\"(\\\"|\\{|[^\"{])*(?={)",
-  "name": "string.quoted",
-  "comment": "An interpolated string start"
-},
+    {
+      "match": "\\b(package|import-plugin|import|database|db)\\b",
+      "name": "keyword.other",
+      "comment": "A keyword"
+    },
+    {
+      "match": "\\b(type|function|module|match|parser|with|as|case|default|if|then|else|or|end|abstract)\\b",
+      "name": "keyword.control",
+      "comment": "A keyword"
+    },
+    {
+      "match": "\\b(client|server|exposed|both)\\b",
+      "name": "invalid.illegal",
+      "comment": "A dangerous modifier"
+    },
+    {
+      "match": "\\b(private|protected|recursive)\\b",
+      "name": "keyword.other",
+      "comment": "A safe modifier"
+    },
+    {
+      "match": "(=|:|<-|[|]|->)",
+      "name": "keyword.control",
+      "comment": "A keyword"
+    },
+    {
+      "match": "\\b(string|int|bool|xml|xhtml|binary)\\b",
+      "name": "support.type",
+      "comment": "Common library types"
+    },
+    {
+      "match": "\\b(true|false|void|none|empty)\\b",
+      "name": "constant.language",
+      "comment": "A well known named constant"
+    },
+    {
+      "match": "\\b[0-9]+([.][0-9]+)?(e(-|[+]?)[0-9]+)?\\b",
+      "name": "constant.numeric",
+      "comment": "A real"
+    },
+    {
+      "match": "@(static_include_directory|static_resource_directory|async|expand)",
+      "name": "keyword.other",
+      "comment": "Usual directives"
+    },
+    {
+      "match": "@[A-Za-z0-9_]+\\b",
+      "name": "invalid.deprecated",
+      "comment": "An exotic directive"
+    },
+    {
+      "match": "[-+*/]+",
+      "name": "support.function",
+      "comment": "An operator"
+    },
+    {
+      "match": "<|>|==|<=|>=|!=",
+      "name": "support.function",
+      "comment": "A comparison"
+    },
 
-{ "match": "(?<=})(\\\"|\\{|[^\"{])*\"",
-  "name": "string.quoted",
-  "comment": "An interpolated string end"
-},
+    /** Function bindings. */
 
-{ "match": "\"(\\\"|\\{|[^\"{])*\"",
-  "name": "string.quoted",
-  "comment": "A constant string"
-},
+    { "include": "#function-def" },
 
-{ "match": "\\b[0-9]+([.][0-9]+)?(e(-|[+]?)[0-9]+)?\\b",
-  "name": "constant.numeric",
-  "comment": "A real"
-},
+    /** To sort out. */
 
+    {
+      "match": "^[ \t]*[#][-`a-zA-Z]+[ \t]*(?=([=]|<-))",
+      "name": "storage.modifier",
+      "comment": "A dom side effect target"
+    },
+    {
+      "match": "^[ \t]*[a-zA-Z_0-9]+[ \t]*(:[ \t]*[A-Za-z0-9]+[ \t]*)?(?!==)(?=[=])",
+      "name": "support.constant",
+      "comment": "A constant binding"
+    },
+    {
+      "match": "^[ \t]*`[^`]+`[ \t]*(:[A-Za-z0-9]+)?(?=[=])",
+      "name": "support.constant",
+      "comment": "A constant binding"
+    }
 
-{
-  "match": "</([-A-Za-z0-9]+:)?[A-Za-z0-9]*>",
-  "name": "string.other",
-  "comment": "Close tag"
-},
-
-{
-  "match": "<([-A-Za-z0-9]+)?(([A-Za-z0-9]+( |>)))((?![{])(?!</).)*",
-  "name": "string.other",
-  "comment": "Tag until end or insert"
-},
-
-{
-  "match": "<>((?![{])(?!</).)*",
-  "name": "string.other",
-  "comment": "Tag until end or insert"
-},
-
-{
-  "match": "(?<=})[ \t]*>((?![{])(?!</).)*",
-  "name": "string.other",
-  "comment": "Insert end in tag"
-},
-
-{ "match": "(?<=})([^<{])*(?=<)",
-  "name": "string.quoted",
-  "comment": "An xhtml end"
-},
-
-
-{
-  "match": "(?<=(</))[ \t]*>[^{]*(?=(/>))",
-  "name": "string.other",
-  "comment": "Insert end in tag"
-},
-
-{ "match": "^[ \t]*[#][-`a-zA-Z]+[ \t]*(?=([=]|<-))",
-  "name": "storage.modifier",
-  "comment": "A dom side effect target"
-},
-
-{ "match": "^[ \t]*[/][-`a-zA-Z/]+[ \t]*(?=([=]|<-))",
-  "name": "storage.modifier",
-  "comment": "A db side effect target"
-},
-
-
-{ "match": "^[ \t]*[a-zA-Z_0-9]+[ \t]*(:[ \t]*[A-Za-z0-9]+[ \t]*)?(?!==)(?=[=])",
-  "name": "support.constant",
-  "comment": "A constant binding"
-},
-
-{ "match": "^[ \t]*`[^`]+`[ \t]*(:[A-Za-z0-9]+)?(?=[=])",
-  "name": "support.constant",
-  "comment": "A constant binding"
-},
-
-
-{ "match": "(?<=function)[ \t]*([A-Za-z0-9.]+[ \t]+)?[a-zA-Z_0-9]+(?=[(])",
-  "name": "support.function",
-  "comment": "A function binding"
-},
-
-{ "match": "(?<=function)[ \t]*`[^`]+`+(?=[(])",
-  "name": "support.function",
-  "comment": "A function binding"
-},
-
-
-{ "match": "[a-zA-Z_]+[(][^)]*[)][ \t]*([:][^=]*?)?(?=[=])(?!==)",
-  "name": "support.function",
-  "comment": "A function binding"
-},
-
-{ "match": "`[^`]+`[(][^)]*[)][ \t]*(?=[=])",
-  "name": "support.function",
-  "comment": "A function binding"
-},
-
-
-
-{ "match": "<|>|==|<=|>=|!=",
-  "name": "support.function",
-  "comment": "A comparison"
-},
-
-
-{ "match": "\\b(type|function|module|match|parser|with|as|case|default|if|then|else|or|end)\\b",
-  "name": "keyword.control",
-  "comment": "A keyword"
-},
-
-{ "match": "(=|:|<-|[|]|->)",
-  "name": "keyword.control",
-  "comment": "A keyword"
-},
-
-
-{ "match": "\\b(client|server|exposed)\\b",
-  "name": "invalid.illegal",
-  "comment": "A dangerous directive"
-},
-
-{ "match": "(@client|@server|@publish)\\b",
-  "name": "invalid.illegal",
-  "comment": "A dangerous directive"
-},
-
-{ "match": "(\\bprivate|\\bprotected|@private|@server_private|@async)\\b",
-  "name": "keyword.other",
-  "comment": "A safe directive"
-},
-
-
-{ "match": "@static_include_directory|@static_resource_directory",
-  "name": "keyword.other",
-  "comment": "A directive"
-},
-
-
-{ "match": "@[A-Za-z0-9_]+\\b",
-  "name": "invalid.deprecated",
-  "comment": "An exotic directive"
-},
-
-
-
-{ "match": "[-+*/]+",
-  "name": "support.function",
-  "comment": "An operator"
-},
-
-{ "match": "[[(){},;]|]",
-  "name": "delimiter",
-  "comment" : "delimiter, take something else for name"
-},
-
-{ "match": "true|false|void|none|empty",
-  "name": "constant.language",
-  "comment": "A well known named constant"
-}
-
+    /** Garbage collection. */
+    // {
+    //   "match": ".*?"
+    // }
   ]
 }
