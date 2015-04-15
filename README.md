@@ -5,19 +5,19 @@
 
 # Plugin Features
 
-1) Syntax highlighting
-2) Build system
-3) Code completion
-4) Contextual access to the online API documentation
-5) Tutorials (one for now)
+1. Syntax highlighting
+2. Build system
+3. Code completion
+4. Contextual access to the online API documentation
+5. Tutorials (one for now)
 
 # How to install the Opa plugin ?
 
-1) Download the [package](https://github.com/downloads/MLstate/OpaSublimeText/Opa.sublime-package)
-2) Move it to `~/.config/sublime-text(2)/Installed Packages/` (linux)
+1. Download the [package](https://github.com/downloads/MLstate/OpaSublimeText/Opa.sublime-package)
+2. Move it to `~/.config/sublime-text(2)/Installed Packages/` (linux)
 or `%APPDATA%\Sublime Text( 2)\Installed Packages\` (windows)
 or `~/Library/Application Support/Sublime Text( 2)/Installed Packages` (mac)
-3) Start sublime and check that menu entry [View -> Syntax -> Opa] is present. If not verify 1) and 2) and restart sublime again and again.
+3. Start sublime and check that menu entry [View -> Syntax -> Opa] is present. If not verify 1) and 2) and restart sublime again and again.
 
 # How to have syntax highlighting?
 
@@ -26,6 +26,7 @@ Files with `.opa` extension should automatically get syntax highlighting. If not
 # How to build my application?
 
 Choose a build system:
+
 - [Tools -> Build -> Build System -> Opa-All] builds all Opa files in the current directory
 - [Tools -> Build -> Build System -> Opa-One] builds the single Opa source code you are editing
 - [Tools -> Build -> Build System -> Opa-Conf] uses opa conf files from the current directory.
@@ -62,13 +63,13 @@ Copy the content of the plugin repository to a new Opa directory in your Sublime
 
 You can build the Sublime package yourself if you want:
 
-1) Install the AAAPackage Dev and Package Control Sublime packages
-2) Transform Opa.JSON-tmLanguage:
+1. Install the AAAPackage Dev and Package Control Sublime packages
+2. Transform Opa.JSON-tmLanguage:
   - Open the file
   - Select build system json to tmLanguage
   - F7
-3) Hit [ctrl+p -> "Package Control: Create Package File" -> "Opa"]
-4) You should have the plugin in Opa.sublime-package
+3. Hit [ctrl+p -> "Package Control: Create Package File" -> "Opa"]
+4. You should have the plugin in Opa.sublime-package
 
 # Questions, contributions
 
